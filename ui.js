@@ -322,13 +322,14 @@ function drawAxes(metrics) {
   canvasContext.restore();
 }
 
-function drawTrajectoryForShot(summary, color, metrics, isActiveShot = false) {
+function drawTrajectoryForShot(summary, color, metrics, isActiveShot = false, isLatestShot = false) {
   const samples = window.ProjectilePhysics.getTrajectorySamples(summary.speed, summary.angleDegrees, 120);
 
   canvasContext.save();
   canvasContext.strokeStyle = color;
   canvasContext.lineWidth = (isActiveShot ? 3.5 : 2.5) * window.devicePixelRatio;
   canvasContext.globalAlpha = isActiveShot ? 1 : 0.82;
+  canvasContext.setLineDash(isLatestShot ? [] : [10 * window.devicePixelRatio, 8 * window.devicePixelRatio]);
   canvasContext.beginPath();
 
   samples.forEach((sample, index) => {
@@ -345,8 +346,10 @@ function drawTrajectoryForShot(summary, color, metrics, isActiveShot = false) {
 }
 
 function drawStoredTrajectories(metrics) {
+  const latestShot = state.trajectoryHistory[state.trajectoryHistory.length - 1] ?? null;
+
   state.trajectoryHistory.forEach((shot) => {
-    drawTrajectoryForShot(shot.summary, shot.color, metrics, shot === state.currentShot);
+    drawTrajectoryForShot(shot.summary, shot.color, metrics, shot === state.currentShot, shot === latestShot);
   });
 }
 
