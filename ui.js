@@ -513,7 +513,7 @@ async function loadContent() {
   const response = await fetch("./content.json");
 
   if (!response.ok) {
-    throw new Error(`Kunde inte lasa content.json: ${response.status}`);
+    throw new Error(`Kunde inte läsa content.json: ${response.status}`);
   }
 
   return response.json();
