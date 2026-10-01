@@ -2,6 +2,8 @@
 
 Det här projektet ska bli en interaktiv fysik-illustration som visar hur projektilrörelse fungerar. Målet är att kombinera tydlig visualisering med enkel interaktion så att användaren kan utforska hur olika startvärden påverkar banan genom luften.
 
+Ändring
+
 ## Syfte
 
 Illustrationen ska göra det lättare att förstå sambandet mellan:
