@@ -1,0 +1,299 @@
+:root {
+  --page-bg: radial-gradient(circle at top left, #f8f3de 0%, #f0ece2 38%, #dce4d7 100%);
+  --panel-bg: rgba(255, 252, 244, 0.86);
+  --panel-border: rgba(46, 74, 62, 0.18);
+  --text-main: #1f2f2b;
+  --text-muted: #576861;
+  --accent: #d96a2b;
+  --accent-strong: #a34717;
+  --accent-soft: rgba(217, 106, 43, 0.14);
+  --line: #375b63;
+  --ground: #6d7b3f;
+  --shadow: 0 20px 60px rgba(31, 47, 43, 0.12);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text-main);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(18rem, 24rem) minmax(28rem, 1.25fr);
+  grid-template-areas:
+    "hero visual"
+    "controls visual"
+    "results info";
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.hero-panel,
+.control-panel,
+.visual-panel,
+.results-panel,
+.info-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.hero-panel,
+.control-panel,
+.results-panel,
+.info-panel {
+  padding: 1.25rem;
+}
+
+.hero-panel {
+  grid-area: hero;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--accent-strong);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 3vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.intro,
+.instructions,
+.control-help,
+.result-description,
+.info-block li,
+#formula-body p {
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.status-banner {
+  margin-top: auto;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.control-panel {
+  grid-area: controls;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.control-group label,
+.result-card h3,
+.info-block h2,
+.panel-header h2 {
+  font-size: 1rem;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+output {
+  min-width: 5.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1rem;
+  background: #27454d;
+  color: #fffaf2;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease, opacity 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+#start-button {
+  background: var(--accent);
+}
+
+.visual-panel {
+  grid-area: visual;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 34rem;
+}
+
+.canvas-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: calc(var(--radius-lg) - 8px);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(201, 227, 238, 0.95) 0%, rgba(249, 244, 225, 0.92) 100%),
+    repeating-linear-gradient(90deg, transparent 0, transparent 59px, rgba(55, 91, 99, 0.06) 60px),
+    repeating-linear-gradient(0deg, transparent 0, transparent 59px, rgba(55, 91, 99, 0.06) 60px);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.results-panel {
+  grid-area: results;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.result-card {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(46, 74, 62, 0.08);
+}
+
+.accent-card {
+  background: rgba(217, 106, 43, 0.11);
+}
+
+.result-value {
+  margin: 0.4rem 0;
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.info-panel {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.info-block ul {
+  padding-left: 1.1rem;
+}
+
+#formula-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+@media (max-width: 1100px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "controls"
+      "visual"
+      "results"
+      "info";
+  }
+
+  .visual-panel {
+    min-height: 26rem;
+  }
+
+  .info-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .button-row,
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .control-row {
+    grid-template-columns: 1fr;
+  }
+
+  output {
+    text-align: left;
+  }
+}

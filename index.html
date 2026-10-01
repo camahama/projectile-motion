@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kastrorelse</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-panel">
+        <p class="eyebrow" id="meta-topic"></p>
+        <h1 id="page-title"></h1>
+        <p class="subtitle" id="page-subtitle"></p>
+        <p class="intro" id="page-intro"></p>
+        <p class="instructions" id="page-instructions"></p>
+        <div class="status-banner" id="status-banner" aria-live="polite"></div>
+      </section>
+
+      <section class="control-panel" aria-labelledby="controls-title">
+        <div class="panel-header">
+          <h2 id="controls-title"></h2>
+        </div>
+        <div class="control-group">
+          <label for="speed-input" id="speed-label"></label>
+          <div class="control-row">
+            <input id="speed-input" type="range">
+            <output id="speed-value" for="speed-input"></output>
+          </div>
+          <p class="control-help" id="speed-help"></p>
+        </div>
+        <div class="control-group">
+          <label for="angle-input" id="angle-label"></label>
+          <div class="control-row">
+            <input id="angle-input" type="range">
+            <output id="angle-value" for="angle-input"></output>
+          </div>
+          <p class="control-help" id="angle-help"></p>
+        </div>
+        <div class="button-row">
+          <button id="start-button" type="button"></button>
+          <button id="pause-button" type="button"></button>
+          <button id="reset-button" type="button"></button>
+        </div>
+      </section>
+
+      <section class="visual-panel" aria-labelledby="graph-title">
+        <div class="panel-header">
+          <h2 id="graph-title"></h2>
+        </div>
+        <div class="canvas-frame">
+          <canvas id="trajectory-canvas" width="960" height="540" aria-label="Illustration av kastrorelse"></canvas>
+        </div>
+      </section>
+
+      <section class="results-panel" aria-labelledby="results-title">
+        <div class="panel-header">
+          <h2 id="results-title"></h2>
+        </div>
+        <div class="results-grid">
+          <article class="result-card">
+            <h3 id="elapsed-time-label"></h3>
+            <p class="result-value" id="elapsed-time-value"></p>
+            <p class="result-description" id="elapsed-time-description"></p>
+          </article>
+          <article class="result-card">
+            <h3 id="position-x-label"></h3>
+            <p class="result-value" id="position-x-value"></p>
+            <p class="result-description" id="position-x-description"></p>
+          </article>
+          <article class="result-card">
+            <h3 id="position-y-label"></h3>
+            <p class="result-value" id="position-y-value"></p>
+            <p class="result-description" id="position-y-description"></p>
+          </article>
+          <article class="result-card accent-card">
+            <h3 id="range-label"></h3>
+            <p class="result-value" id="range-value"></p>
+            <p class="result-description" id="range-description"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-panel" aria-labelledby="assumptions-title">
+        <div class="info-block">
+          <h2 id="assumptions-title"></h2>
+          <ul id="assumptions-list"></ul>
+        </div>
+        <div class="info-block" aria-labelledby="formula-title">
+          <h2 id="formula-title"></h2>
+          <div id="formula-body"></div>
+        </div>
+        <div class="info-block" aria-labelledby="teaching-title">
+          <h2 id="teaching-title"></h2>
+          <ul id="teaching-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./physics.js"></script>
+    <script type="module" src="./ui.js"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "language": "sv",
+    "topic": "ideal kastrorelse",
+    "audience": "gymnasiefysik"
+  },
+  "page": {
+    "title": "Kastrorelse utan luftmotstand",
+    "subtitle": "Undersok hur starthastighet och vinkel paverkar en projektils bana.",
+    "intro": "Illustrationen visar en ideal kastrorelse i två dimensioner. Modellen antar konstant tyngdacceleration, inget luftmotstand och samma start- och landningshojd.",
+    "instructions": "Andra starthastighet och vinkel for att se hur banan, flygtiden, maxhojden och rackvidden forandras."
+  },
+  "assumptions": {
+    "title": "Antaganden i modellen",
+    "items": [
+      "Alla storheter anges i SI-enheter.",
+      "Tyngdaccelerationen ar konstant: g = 9,81 m/s2.",
+      "Luftmotstand bortses ifran.",
+      "Projektilen startar och landar pa samma hojd.",
+      "Modellen beskriver en punktmassa utan rotation."
+    ]
+  },
+  "controls": {
+    "_comment_uiUpdate": "Tillagt for grannssnittets forsta version.",
+    "title": "Reglage",
+    "speed": {
+      "label": "Starthastighet",
+      "unit": "m/s",
+      "help": "Anger hur snabbt projektilen ror sig precis vid utskjutningen.",
+      "min": 0,
+      "max": 40,
+      "step": 0.5,
+      "default": 20
+    },
+    "angle": {
+      "label": "Vinkel",
+      "unit": "grader",
+      "help": "Anger vinkeln mellan marken och starthastigheten.",
+      "min": 0,
+      "max": 90,
+      "step": 1,
+      "default": 45
+    },
+    "start": {
+      "label": "Starta",
+      "help": "Startar rorelsen fran startpunkten."
+    },
+    "pause": {
+      "label": "Pausa",
+      "help": "Pausar rorelsen dar projektilen befinner sig."
+    },
+    "reset": {
+      "label": "Aterstall",
+      "help": "Atergar till forvalda varden."
+    },
+    "animate": {
+      "label": "Starta animation",
+      "help": "Visar projektilens rorelse steg for steg langs banan."
+    }
+  },
+  "results": {
+    "_comment_uiUpdate": "Tillagt for visning av aktuell status under animationen.",
+    "title": "Beraknade storheter",
+    "elapsedTime": {
+      "label": "Forfluten tid",
+      "unit": "s",
+      "description": "Tiden som har gatt sedan projektilen startade sin rorelse."
+    },
+    "positionX": {
+      "label": "Position x",
+      "unit": "m",
+      "description": "Projektilens horisontella position relativt startpunkten."
+    },
+    "positionY": {
+      "label": "Position y",
+      "unit": "m",
+      "description": "Projektilens vertikala position relativt marklinjen."
+    },
+    "flightTime": {
+      "label": "Flygtid",
+      "unit": "s",
+      "description": "Den totala tiden fran utskjutning tills projektilen ar tillbaka pa markniva."
+    },
+    "maxHeight": {
+      "label": "Maxhojd",
+      "unit": "m",
+      "description": "Den storsta vertikala hojd som projektilen nar over startpunkten."
+    },
+    "range": {
+      "label": "Rackvidd",
+      "unit": "m",
+      "description": "Det horisontella avstandet mellan startpunkt och landningspunkt."
+    },
+    "vx": {
+      "label": "Horisontell hastighetskomponent",
+      "unit": "m/s",
+      "description": "Den del av starthastigheten som verkar langs marken."
+    },
+    "vy": {
+      "label": "Vertikal hastighetskomponent",
+      "unit": "m/s",
+      "description": "Den del av starthastigheten som verkar uppat."
+    }
+  },
+  "graph": {
+    "_comment_uiUpdate": "Tillagt for grafiska etiketter i den forsta UI-versionen.",
+    "title": "Bana",
+    "xAxis": "Horisontellt avstand (m)",
+    "yAxis": "Hojd (m)",
+    "trajectory": "Projektilens bana",
+    "launchPoint": "Startpunkt",
+    "landingPoint": "Landningspunkt",
+    "projectile": "Projektil",
+    "ground": "Marklinje"
+  },
+  "status": {
+    "_comment_uiUpdate": "Tillagt for knappar och lektionstydlig feedback i UI:t.",
+    "ready": "Klar for start",
+    "running": "Rorelsen pagar",
+    "paused": "Rorelsen ar pausad",
+    "finished": "Projektilen har landat",
+    "changed": "Startinstallningarna andrades. Rorelsen har aterstallts."
+  },
+  "teaching": {
+    "title": "Att observera",
+    "prompts": [
+      "Hur forandras rackvidden nar vinkeln okar fran 10 grader till 45 grader?",
+      "Varfor blir banan symmetrisk nar start- och landningshojden ar samma?",
+      "Hur paverkas flygtiden om starthastigheten dubbleras men vinkeln behalls?",
+      "Vilken roll spelar den vertikala hastighetskomponenten for maxhojden?"
+    ]
+  },
+  "formulaText": {
+    "title": "Fysikmodell",
+    "body": [
+      "Den horisontella rorelsen har konstant fart eftersom ingen kraft verkar i x-led.",
+      "Den vertikala rorelsen ar likformigt accelererad med accelerationen -g.",
+      "Sambanden kan skrivas som x(t) = v0 cos(theta) * t och y(t) = v0 sin(theta) * t - 0,5 * g * t^2."
+    ]
+  }
+}
