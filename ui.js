@@ -417,6 +417,12 @@ function drawScene() {
   drawGuideValues(metrics);
 }
 
+function scheduleMathTypesetting() {
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise([elements.formulaBody]).catch(() => {});
+  }
+}
+
 function populateTextContent(content) {
   setTextContent(elements.metaTopic, `${content.meta.audience} · ${content.meta.topic}`);
   setTextContent(elements.pageTitle, content.page.title);
@@ -458,6 +464,17 @@ function populateTextContent(content) {
     paragraphElement.textContent = paragraph;
     elements.formulaBody.appendChild(paragraphElement);
   });
+
+  if (Array.isArray(content.formulaText.equations)) {
+    content.formulaText.equations.forEach((equation) => {
+      const equationElement = document.createElement("div");
+      equationElement.className = "equation-block";
+      equationElement.textContent = `$$${equation}$$`;
+      elements.formulaBody.appendChild(equationElement);
+    });
+  }
+
+  scheduleMathTypesetting();
 
   elements.teachingList.innerHTML = "";
   content.teaching.prompts.forEach((item) => {

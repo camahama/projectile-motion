@@ -136,6 +136,13 @@
       "Den horisontella rorelsen har konstant fart eftersom ingen kraft verkar i x-led.",
       "Den vertikala rorelsen ar likformigt accelererad med accelerationen -g.",
       "Sambanden kan skrivas som x(t) = v0 cos(theta) * t och y(t) = v0 sin(theta) * t - 0,5 * g * t^2."
+    ],
+    "equations": [
+      "x(t) = v_0 \\cos(\\theta) \\cdot t",
+      "y(t) = v_0 \\sin(\\theta) \\cdot t - \\frac{1}{2} g t^2",
+      "t_{\\text{flyg}} = \\frac{2 v_0 \\sin(\\theta)}{g}",
+      "R = \\frac{v_0^2 \\sin(2\\theta)}{g}",
+      "h_{\\text{max}} = \\frac{(v_0 \\sin(\\theta))^2}{2g}"
     ]
   }
 }
