@@ -278,6 +278,14 @@ summary:focus-visible {
   background: #1d4ed8;
 }
 
+.primary-button.replay-button {
+  background: #16a34a;
+}
+
+.primary-button.replay-button:hover {
+  background: #15803d;
+}
+
 .secondary-button {
   color: var(--ink);
   background: #edf2f7;

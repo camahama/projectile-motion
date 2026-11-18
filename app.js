@@ -245,6 +245,7 @@
     };
     elements.playLabel.textContent = labels[state];
     elements.playIcon.textContent = state === "playing" ? "Ⅱ" : "▶";
+    elements.play.classList.toggle("replay-button", state === "finished");
   }
 
   function stopAnimation() {
