@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Utforska kaströrelse och se hur hastighet och vinkel påverkar flygtid och räckvidd.">
+    <title>Kaströrelse</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow" data-text="eyebrow"></p>
+        <h1 data-text="title"></h1>
+        <p class="intro" data-text="intro"></p>
+      </header>
+
+      <section class="simulator" aria-labelledby="simulator-title">
+        <h2 id="simulator-title" class="sr-only">Interaktiv simulering</h2>
+
+        <div class="visual-panel">
+          <div class="plot-heading">
+            <span data-text="plotTitle"></span>
+            <span class="plot-hint" data-text="plotHint"></span>
+          </div>
+          <svg id="trajectory" viewBox="0 0 800 440" role="img" aria-labelledby="plot-title plot-description">
+            <title id="plot-title" data-text="plotAccessibleTitle"></title>
+            <desc id="plot-description" data-text="plotAccessibleDescription"></desc>
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" class="grid-line" fill="none"/>
+              </pattern>
+              <linearGradient id="trajectory-gradient" x1="0" x2="1">
+                <stop offset="0" stop-color="#2563eb"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+              <filter id="ball-shadow" x="-100%" y="-100%" width="300%" height="300%">
+                <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".25"/>
+              </filter>
+              <clipPath id="plot-area">
+                <rect x="56" y="24" width="708" height="368"/>
+              </clipPath>
+            </defs>
+            <rect x="56" y="24" width="708" height="368" rx="12" fill="url(#grid)"/>
+            <line x1="56" y1="392" x2="764" y2="392" class="axis"/>
+            <line x1="56" y1="392" x2="56" y2="24" class="axis"/>
+            <text x="410" y="430" text-anchor="middle" class="axis-label">x (m)</text>
+            <text x="18" y="208" text-anchor="middle" transform="rotate(-90 18 208)" class="axis-label">y (m)</text>
+            <g id="x-ticks"></g>
+            <g id="y-ticks"></g>
+            <g id="previous-paths" clip-path="url(#plot-area)" aria-label="Tidigare kastbanor"></g>
+            <path id="path" clip-path="url(#plot-area)" fill="none" stroke="url(#trajectory-gradient)" stroke-width="5" stroke-linecap="round"/>
+            <circle id="ball" cx="56" cy="392" r="10" class="ball" filter="url(#ball-shadow)"/>
+            <circle cx="56" cy="392" r="5" class="launch-point"/>
+            <line id="velocity-vector" x1="56" y1="392" x2="56" y2="392" class="velocity-vector"/>
+            <polygon id="vector-head" class="velocity-head" points=""/>
+            <text id="apex-label" class="plot-label" text-anchor="middle"></text>
+            <line id="range-line" x1="56" y1="392" x2="764" y2="392" class="range-line"/>
+            <text id="range-label" class="range-label" text-anchor="middle"></text>
+          </svg>
+
+          <div class="animation-controls">
+            <button id="play-button" class="primary-button" type="button">
+              <span class="play-icon" aria-hidden="true">▶</span>
+              <span data-text="play"></span>
+            </button>
+            <button id="reset-button" class="secondary-button" type="button" data-text="reset"></button>
+            <output id="time-output" class="time-output">t = 0,00 s</output>
+          </div>
+        </div>
+
+        <aside class="control-panel" aria-labelledby="controls-title">
+          <h2 id="controls-title" data-text="controlsTitle"></h2>
+          <p data-text="controlsIntro"></p>
+
+          <div class="control">
+            <div class="label-row">
+              <label for="speed"><span data-text="speedLabel"></span></label>
+              <output id="speed-value" for="speed"></output>
+            </div>
+            <input id="speed" type="range" min="5" max="40" step="1" value="20">
+            <div class="range-ends"><span>5 m/s</span><span>40 m/s</span></div>
+          </div>
+
+          <div class="control">
+            <div class="label-row">
+              <label for="angle"><span data-text="angleLabel"></span></label>
+              <output id="angle-value" for="angle"></output>
+            </div>
+            <input id="angle" type="range" min="5" max="85" step="1" value="45">
+            <div class="range-ends"><span>5°</span><span>85°</span></div>
+          </div>
+
+          <div class="control">
+            <div class="label-row">
+              <label for="gravity"><span data-text="gravityLabel"></span></label>
+              <output id="gravity-value" for="gravity"></output>
+            </div>
+            <select id="gravity">
+              <option value="9.82">Jorden — 9,82 m/s²</option>
+              <option value="1.62">Månen — 1,62 m/s²</option>
+              <option value="3.71">Mars — 3,71 m/s²</option>
+              <option value="24.79">Jupiter — 24,79 m/s²</option>
+            </select>
+          </div>
+
+          <div class="assumptions">
+            <strong data-text="assumptionsTitle"></strong>
+            <ul id="assumptions-list"></ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="results" aria-labelledby="results-title">
+        <h2 id="results-title" data-text="resultsTitle"></h2>
+        <div class="result-grid" aria-live="polite">
+          <article class="result-card">
+            <span class="result-label" data-text="flightTimeLabel"></span>
+            <strong id="flight-time" class="result-number"></strong>
+            <span class="result-unit" data-text="seconds"></span>
+          </article>
+          <article class="result-card">
+            <span class="result-label" data-text="rangeLabel"></span>
+            <strong id="range" class="result-number"></strong>
+            <span class="result-unit" data-text="metres"></span>
+          </article>
+          <article class="result-card">
+            <span class="result-label" data-text="maxHeightLabel"></span>
+            <strong id="max-height" class="result-number"></strong>
+            <span class="result-unit" data-text="metres"></span>
+          </article>
+        </div>
+      </section>
+
+      <dialog id="axis-dialog" class="axis-dialog" aria-labelledby="axis-dialog-title">
+        <form id="axis-form">
+          <h2 id="axis-dialog-title" data-text="axisDialogTitle"></h2>
+          <label for="axis-maximum" id="axis-dialog-label"></label>
+          <div class="axis-input-row">
+            <input id="axis-maximum" type="number" min="0.1" step="any" required>
+            <span>m</span>
+          </div>
+          <p id="axis-error" class="input-error" role="alert"></p>
+          <div class="dialog-actions">
+            <button id="axis-cancel" class="secondary-button" type="button" data-text="cancel"></button>
+            <button class="primary-button" type="submit" data-text="save"></button>
+          </div>
+        </form>
+      </dialog>
+
+      <section class="learning-grid">
+        <article class="learning-card">
+          <h2 data-text="modelTitle"></h2>
+          <p data-text="modelIntro"></p>
+          <div class="equations" data-equations></div>
+        </article>
+        <article class="learning-card challenge">
+          <p class="eyebrow" data-text="challengeEyebrow"></p>
+          <h2 data-text="challengeTitle"></h2>
+          <ol id="challenge-list"></ol>
+          <details>
+            <summary data-text="answerTitle"></summary>
+            <p data-text="answer"></p>
+          </details>
+        </article>
+      </section>
+
+      <footer>
+        <span data-text="footer"></span>
+      </footer>
+    </main>
+
+    <script src="physics.js"></script>
+    <script src="texts.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
