@@ -47,8 +47,8 @@
       flightTimeLabel: "Flygtid",
       rangeLabel: "Räckvidd",
       maxHeightLabel: "Maxhöjd",
-      seconds: "sekunder",
-      metres: "meter",
+      seconds: "sekunder (s)",
+      metres: "meter (m)",
       modelTitle: "Modellen bakom diagrammet",
       modelIntro: "Rörelsen delas upp i horisontell och vertikal riktning. Hastigheten är konstant horisontellt, medan tyngdkraften ändrar den vertikala hastigheten.",
       equations: [
